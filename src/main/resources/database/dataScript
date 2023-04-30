@@ -1,0 +1,17 @@
+USE HostAndTravelDB
+GO
+INSERT INTO Gender (GenderName)
+VALUES ('Male'),('Female')
+GO
+INSERT INTO Country(CountryName)
+VALUES ('Croatia')
+GO
+INSERT INTO City(CityName,CountryID)
+VALUES ('Zagreb',1)
+GO
+INSERT INTO Person (FirstName,LastName,Email,HostStatus,isActive,AboutMe,BirthDate,GenderID,CityID,HashedPassword)
+VALUES('AdminName','AdminLastName','admin@hostandtravel.com',1,1,'This is admin account','1999-01-01',1,1, '$2a$10$KFAt7kpig/JKKDVucQJh3Or0YkiwiVRyNGZz/e.vi2RnPzQDBf7BK');
+GO
+INSERT INTO Authorities (Email,Authority) VALUES('admin@hostandtravel.com', 'ROLE_ADMIN');
+
+

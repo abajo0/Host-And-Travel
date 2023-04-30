@@ -25,7 +25,9 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authz) -> authz
-                        .requestMatchers("/hostAndTravel/login.html", "/login.html").permitAll()
+                        .requestMatchers("/hostAndTravel/login.html", "/login.html",
+                                "/hostAndTravel/register.html","/hostAndTravel/registerNewUser.html").permitAll()
+
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
@@ -39,8 +41,8 @@ public class SecurityConfiguration {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        final String sqlUserName = "select u.username, u.password, u.enabled from users u where u.username = ?";
-        final String sqlAuthorities = "select a.username, a.authority from authorities a where a.username = ?";
+        final String sqlUserName = "select p.Email, P.HashedPassword, p.isActive from Person p where p.Email = ?";
+        final String sqlAuthorities = "select a.Email, a.Authority from Authorities a where a.Email = ?";
 
         auth.jdbcAuthentication().dataSource(dataSource).usersByUsernameQuery(sqlUserName)
                 .authoritiesByUsernameQuery(sqlAuthorities).passwordEncoder(new BCryptPasswordEncoder());
