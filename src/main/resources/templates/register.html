@@ -5,7 +5,12 @@
 </head>
 <body>
 <h1>register page</h1>
-<form action="#" th:action="@{/hostAndTravel/registerNewUser.html}" th:object="${newUser}"
+
+<ul>
+    <li th:each="err : ${#fields.errors('person.*')}" th:text="${err}" />
+</ul>
+
+<form action="#" th:action="@{/hostAndTravel/registerNewUser.html}" th:object="${person}"
       method="post">
     <fieldset>
         <input type="submit" id="submitButton" th:value="Register">
@@ -16,6 +21,9 @@
                 <th> Last Name </th>
                 <th> Email </th>
                 <th> Password </th>
+                <!--<th> Gender </th>-->
+                <th> BirthDate </th>
+
             </tr>
             </thead>
             <tbody>
@@ -23,6 +31,30 @@
             <td><input th:field="*{lastName}" required="required" /></td>
             <td><input th:field="*{email}" required="required" /></td>
             <td><input th:field="*{hashedPassword}" required="required" /></td>
+
+            <td>
+                <select name="gender" th:field="*{gender}">
+                    <option th:each="gender : ${T(hr.algebra.hostandtravel.domain.Gender).values()}" th:value="${gender}" th:text="${gender}"></option>
+                </select>
+            </td>
+
+            <td><input type="date" th:field="*{birthdate}" required="required"/></td>
+
+
+            <td>
+                <select class="form-control"> <!-- this is not important,only city is passed to form -->
+                    <option value="0">select country</option>
+                    <option th:each="country : ${allCountries}" th:value="${country.countryName}" th:text="${country.countryName}"></option>
+                </select>
+            </td>
+            <td>
+                <select class="form-control"  th:field="*{city}">
+                    <option value="0">select city</option>
+                    <option th:each="city : ${allCities}" th:value="${city.cityName}" th:text="${city.cityName}"></option>
+                </select>
+            </td>
+
+
 
             </tbody>
         </table>

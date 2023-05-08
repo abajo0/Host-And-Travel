@@ -12,6 +12,10 @@ GO
 INSERT INTO Person (FirstName,LastName,Email,HostStatus,isActive,AboutMe,BirthDate,GenderID,CityID,HashedPassword)
 VALUES('AdminName','AdminLastName','admin@hostandtravel.com',1,1,'This is admin account','1999-01-01',1,1, '$2a$10$KFAt7kpig/JKKDVucQJh3Or0YkiwiVRyNGZz/e.vi2RnPzQDBf7BK');
 GO
+INSERT INTO Person (FirstName,LastName,Email,HostStatus,isActive,AboutMe,BirthDate,GenderID,CityID,HashedPassword)
+VALUES('UserFirstName','UserLastName','user@hostandtravel.com',1,1,'This is user account','2000-01-01',1,1, '$2a$10$MzkaBFiZ3nfau6w.TToTx.pjyYfDE.AS/lO9QiS8nC8bbMxmYQnLm');
+GO
 INSERT INTO Authorities (Email,Authority) VALUES('admin@hostandtravel.com', 'ROLE_ADMIN');
-
+GO
+INSERT INSERT Authorities (Email,Authority) VALUES('user@hostandtravel.com', 'ROLE_USER');
 

@@ -12,5 +12,8 @@ public class PasswordUtil {
         return passwordEncoder.encode(password);
     }
 
+    public static void main(String[] args) {
+        System.out.println(passwordEncoder.encode("user"));
+    }
 
 }

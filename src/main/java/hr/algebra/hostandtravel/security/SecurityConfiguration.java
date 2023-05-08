@@ -25,7 +25,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authz) -> authz
-                        .requestMatchers("/hostAndTravel/login.html", "/login.html",
+                        .requestMatchers("/hostAndTravel/login.html", "/login.html","register.html",
                                 "/hostAndTravel/register.html","/hostAndTravel/registerNewUser.html").permitAll()
 
                         .anyRequest().authenticated()
@@ -33,7 +33,7 @@ public class SecurityConfiguration {
                 .formLogin((form) -> form
                         .loginPage("/hostAndTravel/login.html")
                         .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/hostAndTravel/menu.html")
+                        .defaultSuccessUrl("/hostAndTravel/register.html")
                         .permitAll())
                 .logout((logout) -> logout.permitAll());
         return http.build();

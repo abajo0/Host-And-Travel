@@ -5,6 +5,7 @@ import java.util.List;
 public interface Repository <T> {
     List<T> getAllEntities();
     T getEntity(int id);
-    T saveEntity(T entity);
+    Boolean updateEntity(T entity);
+    T insertEntity(T entity);
     Boolean deleteEntity(int id);
 }
