@@ -32,10 +32,10 @@ CityID int FOREIGN KEY REFERENCES City(IDCity) NOT NULL,
 HashedPassword nvarchar(250) CHECK (LEN(HashedPassword) > 5) NOT NULL
 )
 GO
-create table Authorities (
-IDAuthorities int IDENTITY PRIMARY KEY NOT NULL,
+create table Authority (
+IDAuthority int IDENTITY PRIMARY KEY NOT NULL,
 Email nvarchar(200) UNIQUE NOT NULL,
-Authority nvarchar(50) not null,  --Admin,User
+Role nvarchar(50) not null,  --Admin,User
 )
 GO
 create table RequestStatus(

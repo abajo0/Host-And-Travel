@@ -1,23 +1,20 @@
 package hr.algebra.hostandtravel.controller;
 
-import hr.algebra.hostandtravel.domain.Gender;
+import hr.algebra.hostandtravel.domain.Authority;
+import hr.algebra.hostandtravel.domain.HnTConstants;
 import hr.algebra.hostandtravel.domain.Person;
+import hr.algebra.hostandtravel.repository.AuthorityRepository;
 import hr.algebra.hostandtravel.repository.CityRepository;
 import hr.algebra.hostandtravel.repository.CountryRepository;
 import hr.algebra.hostandtravel.repository.PersonRepository;
 import hr.algebra.hostandtravel.util.PasswordUtil;
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.aspectj.apache.bcel.generic.ClassGen;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.Instant;
-import java.util.Date;
 
 @Controller
 @RequestMapping("/hostAndTravel")
@@ -25,6 +22,7 @@ import java.util.Date;
 public class LoginController {
     PersonRepository personRepository;
     CountryRepository countryRepository;
+    AuthorityRepository authorityRepository;
     CityRepository cityRepository;
     @GetMapping("login.html")
     public String openLoginPage() {
@@ -54,12 +52,17 @@ public class LoginController {
             return "register";
         }
 
-
         person.setHashedPassword(PasswordUtil.hashPassword(person.getHashedPassword()));
         person.setIsActive(true);
         person.setHostStatus(false);
-
         personRepository.insertEntity(person);
+
+        Authority authority = new Authority();
+        authority.setEmail(person.getEmail());
+        authority.setRole(HnTConstants.ROLE_USER);
+        authorityRepository.insertAuthority(authority);
+
+
         return "menu.html";
     }
 

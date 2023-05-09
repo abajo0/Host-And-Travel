@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 @org.springframework.stereotype.Repository
 @Primary
 @EnableAutoConfiguration
@@ -65,7 +66,7 @@ public class PersonRepository implements Repository<Person>{
         params.put("IsActive", person.getIsActive());
         params.put("AboutMe", person.getAboutMe());
         params.put("BirthDate", person.getBirthdate());
-        params.put("GenderID", DBUtil.getIdByGender(person.getGender()));
+        params.put("GenderID", person.getGender().id);
         params.put("CityID", cityRepository.getCityIdByName(person.getCity()));
         params.put("HashedPassword", person.getHashedPassword());
 
