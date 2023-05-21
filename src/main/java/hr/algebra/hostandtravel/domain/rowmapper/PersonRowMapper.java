@@ -3,7 +3,7 @@ package hr.algebra.hostandtravel.domain.rowmapper;
 import hr.algebra.hostandtravel.domain.Gender;
 import hr.algebra.hostandtravel.domain.Person;
 import hr.algebra.hostandtravel.repository.CityRepository;
-import hr.algebra.hostandtravel.util.DBUtil;
+import hr.algebra.hostandtravel.repository.GenderRepository;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
@@ -11,15 +11,18 @@ import java.sql.SQLException;
 
 public class PersonRowMapper implements RowMapper<Person> {
     CityRepository cityRepository;
-    public PersonRowMapper(CityRepository cityRepository){
+    GenderRepository genderRepository;
+    public PersonRowMapper(CityRepository cityRepository,GenderRepository genderRepository){
         this.cityRepository = cityRepository;
+        this.genderRepository = genderRepository;
     }
     @Override
     public Person mapRow(ResultSet rs, int rowNum) throws SQLException {
         boolean hostStatus = rs.getInt("HostStatus") == 1;
         boolean isActive = rs.getInt("IsActive") == 1;
         String city = cityRepository.getCityNameById(rs.getInt("CityID"));
-        Gender gender = DBUtil.getGenderById(rs.getInt("GenderID"));
+        String gender  = genderRepository.getGenderNameById(rs.getInt("GenderID"));
+
 
         return new Person(
                 rs.getInt("IDPerson"),
@@ -29,7 +32,7 @@ public class PersonRowMapper implements RowMapper<Person> {
                 hostStatus,
                 isActive,
                 rs.getString("AboutMe"),
-                rs.getDate("BirthDate"),
+                rs.getDate("BirthDate").toLocalDate(),
                 gender,
                 city,
                 rs.getString("HashedPassword"));

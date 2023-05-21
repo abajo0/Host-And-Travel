@@ -21,7 +21,6 @@
                 <th> Last Name </th>
                 <th> Email </th>
                 <th> Password </th>
-                <!--<th> Gender </th>-->
                 <th> BirthDate </th>
 
             </tr>
@@ -33,8 +32,9 @@
             <td><input th:field="*{hashedPassword}" required="required" /></td>
 
             <td>
-                <select name="gender" th:field="*{gender}">
-                    <option th:each="gender : ${T(hr.algebra.hostandtravel.domain.Gender).values()}" th:value="${gender}" th:text="${gender}"></option>
+                <select class="form-control"  th:field="*{gender}">
+                    <option value="0">select Gender</option>
+                    <option th:each="gender : ${allGenders}" th:value="${gender.genderName}" th:text="${gender.genderName}"></option>
                 </select>
             </td>
 

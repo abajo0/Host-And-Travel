@@ -3,10 +3,7 @@ package hr.algebra.hostandtravel.controller;
 import hr.algebra.hostandtravel.domain.Authority;
 import hr.algebra.hostandtravel.domain.HnTConstants;
 import hr.algebra.hostandtravel.domain.Person;
-import hr.algebra.hostandtravel.repository.AuthorityRepository;
-import hr.algebra.hostandtravel.repository.CityRepository;
-import hr.algebra.hostandtravel.repository.CountryRepository;
-import hr.algebra.hostandtravel.repository.PersonRepository;
+import hr.algebra.hostandtravel.repository.*;
 import hr.algebra.hostandtravel.util.PasswordUtil;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -24,6 +21,7 @@ public class LoginController {
     CountryRepository countryRepository;
     AuthorityRepository authorityRepository;
     CityRepository cityRepository;
+    GenderRepository genderRepository;
     @GetMapping("login.html")
     public String openLoginPage() {
         return "login";
@@ -38,8 +36,9 @@ public class LoginController {
     public String openRegisterPage(Model model){
         model.addAttribute("allCountries",countryRepository.getAllCountries());
         model.addAttribute("allCities",cityRepository.getAllCities());
+        model.addAttribute("allGenders",genderRepository.getAllGenders());
 
-        return "register";
+        return "register.html";
     }
     @PostMapping("registerNewUser.html")
     public String registerNewUser(Model model, @Valid Person person, BindingResult bindingResult) {
@@ -54,7 +53,7 @@ public class LoginController {
 
         person.setHashedPassword(PasswordUtil.hashPassword(person.getHashedPassword()));
         person.setIsActive(true);
-        person.setHostStatus(false);
+        person.setIsHosting(false);
         personRepository.insertEntity(person);
 
         Authority authority = new Authority();

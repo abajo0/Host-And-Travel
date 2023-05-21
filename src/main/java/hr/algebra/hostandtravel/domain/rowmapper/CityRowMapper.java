@@ -1,7 +1,6 @@
 package hr.algebra.hostandtravel.domain.rowmapper;
 
 import hr.algebra.hostandtravel.domain.City;
-import hr.algebra.hostandtravel.util.DBUtil;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

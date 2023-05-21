@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+
+    <title>Profile info: </title>
+</head>
+<body>
+
+        <h4> <a href="#" th:href="@{/hostAndTravel/mainPage.html}"><- back to main page </a> </h4>
+
+        <h4>Check out<label th:text="${firstName}"/> <a href="#" th:href="@{/hostAndTravel/?.html}">'s HostAndTravel history! (not finished) </a> </h4>
+        <table>
+            <thead>
+            <tr>
+                <th> First Name </th>
+                <th> Last Name </th>
+                <th> Host status </th>
+                <th> About me </th>
+                <th> Age </th>
+                <th> Gender </th>
+                <th> City </th>
+            </tr>
+            </thead>
+            <tbody>
+            <td><p th:text="${firstName}" /> </td>
+            <td><p th:text="${lastName}" /></td>
+            <td><p th:text="${hostStatus}" /></td>
+            <td><p th:text="${aboutMe}" /></td>
+            <td> <p th:text="${age}" /></td>
+            <td> <p th:text="${gender}" /></td>
+            <td> <p th:text="${city}" /></td>
+
+
+            </tbody>
+        </table>
+
+        <span th:if="${isPrincipalsProfile == true}"><a href="#" th:href="@{/hostAndTravel/editProfile.html}">Edit profile</a></span>
+
+
+</body>
+</html>

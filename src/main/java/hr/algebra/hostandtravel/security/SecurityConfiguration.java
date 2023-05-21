@@ -33,7 +33,7 @@ public class SecurityConfiguration {
                 .formLogin((form) -> form
                         .loginPage("/hostAndTravel/login.html")
                         .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/hostAndTravel/register.html")
+                        .defaultSuccessUrl("/hostAndTravel/mainPage.html")
                         .permitAll())
                 .logout((logout) -> logout.permitAll());
         return http.build();
@@ -42,7 +42,7 @@ public class SecurityConfiguration {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         final String sqlUserName = "select p.Email, P.HashedPassword, p.isActive from Person p where p.Email = ?";
-        final String sqlAuthorities = "select a.Email, a.Authority from Authorities a where a.Email = ?";
+        final String sqlAuthorities = "select a.Email, a.Role from Authority a where a.Email = ?";
 
         auth.jdbcAuthentication().dataSource(dataSource).usersByUsernameQuery(sqlUserName)
                 .authoritiesByUsernameQuery(sqlAuthorities).passwordEncoder(new BCryptPasswordEncoder());

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h4> <a href="#" th:href="@{/hostAndTravel/mainPage.html}"><- back to main page </a> </h4>
+<br>
+<tr th:each="person: ${hostList}">
+    <td th:text="${person.firstName}" />
+    <td th:text="${person.lastName}" />
+    <td th:text="${person.email}" />
+    <h4>  <a href="#" th:href="@{/hostAndTravel/profile.html(id=${person.idPerson})}"> Profile </a> </h4>
+    <br>
+    <br>
+    <br>
+</tr>
+</body>
+</html>

@@ -4,12 +4,18 @@ import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NoArgsConstructor;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import java.time.Period;
+import java.time.temporal.TemporalAccessor;
+
 
 @Data
 @AllArgsConstructor
@@ -27,18 +33,22 @@ public class Person {
     @Email
     private String email;
 
-    private Boolean hostStatus;
+    private Boolean isHosting;
     private Boolean isActive;
     private String aboutMe;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date birthdate;
-    private Gender gender;
+    private LocalDate birthdate;
+    private String gender;
 
     private String city;
 
     @NotNull
     @Size(min = 2, message = "Password needs to be at least 5 characters long")
     private String hashedPassword;
+
+    public int getAge(){
+        return Period.between(birthdate,LocalDate.now()).getYears();
+    }
 
 
 }

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block th:each="userId: ${userIds}">
+    <a th:href="@{/(id=${userId})}"> User [[${userId}]]</a> <br/>
+</th:block>
+<h4>  <a href="#" th:href="@{/hostAndTravel/profile.html(id=${idPerson})}">Profile </a> </h4>
+<h4><a href="#" th:href="@{/hostAndTravel/hosts.html(city=${cityName})}">Hosts (half done)</a> </h4>
+<h4>  <a href="#" th:href="@{/hostAndTravel/?.html}">Messeges (not finished) </a> </h4>
+
+</body>
+</html>
