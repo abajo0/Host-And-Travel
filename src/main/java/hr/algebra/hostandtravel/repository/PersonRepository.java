@@ -21,7 +21,7 @@ import java.util.Map;
 public class PersonRepository implements Repository<Person>{
 
     private JdbcTemplate jdbcTemplate;
-    NamedParameterJdbcTemplate namedParameterJdbcTemplate ;
+    private NamedParameterJdbcTemplate namedParameterJdbcTemplate ;
     private SimpleJdbcInsert inserter;
 
     private CityRepository cityRepository;

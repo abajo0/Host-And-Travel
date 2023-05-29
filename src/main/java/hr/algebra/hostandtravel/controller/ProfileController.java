@@ -31,7 +31,7 @@ public class ProfileController {
         Person person = personRepository.getEntity(personId);
 
         //true if logged in user  is person
-        boolean isPrincipalsProfile = person.getEmail().equals(principal.getName());
+        boolean isPrincipalsProfile = person.getEmail().equalsIgnoreCase(principal.getName());
         model.addAttribute("isPrincipalsProfile",isPrincipalsProfile);
 
 
@@ -42,6 +42,7 @@ public class ProfileController {
         model.addAttribute("age",person.getAge());
         model.addAttribute("gender",person.getGender());
         model.addAttribute("city",person.getCity());
+        model.addAttribute("personId",person.getIdPerson());
 
         return "profile.html";
     }

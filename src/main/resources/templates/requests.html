@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:custom="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h4> <a href="#" th:href="@{/hostAndTravel/mainPage.html}"><- back to main page </a> </h4>
+
+<h1>Sent requests:</h1>
+<tr th:each="request: ${sentRequests}">
+    <label>status:</label>
+    <td th:text="${request.status}" />
+    <br>
+    <label>start date:</label>
+    <td th:text="${request.startDate}" />
+    <br>
+    <label>end date :</label>
+    <td th:text="${request.endDate}" />
+    <br>
+    <label>host:</label>
+    <a href="#" th:href="@{/hostAndTravel/profile.html(id=${request.host.idPerson})}"> <td th:text="${request.host.firstName}" /> </a>
+    <br>
+    <br>
+    <br>
+    <br>
+</tr>
+
+<br>
+<br>
+<br>
+<br>
+
+<h1>Incoming requests</h1>
+<tr th:each="request: ${incomingRequests}">
+    <label>status:</label>
+    <td th:text="${request.status}" />
+    <br>
+    <label>start date:</label>
+    <td th:text="${request.startDate}" />
+    <br>
+    <label>end date :</label>
+    <td th:text="${request.endDate}" />
+    <br>
+    <label>traveler:</label>
+    <a href="#" th:href="@{/hostAndTravel/profile.html(id=${request.traveler.idPerson})}"> <td th:text="${request.traveler.firstName}" /> </a>
+    <br>
+    <span th:if="${request.status == 'Pending'}">
+       <h4> <a th:href="@{/hostAndTravel/acceptRequest.html(id=${request.idRequest})}" custom:linkMethod="post">Accept request (NOT WORKING)</a></h4>
+        <h4><a th:href="@{/hostAndTravel/declineRequest.html(id=${request.idRequest})}" custom:linkMethod="post">Decline request (NOT WORKING)</a></h4>
+    </span>
+
+    <br>
+    <br>
+    <br>
+</tr>
+</body>
+</html>

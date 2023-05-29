@@ -8,7 +8,7 @@
 
         <h4> <a href="#" th:href="@{/hostAndTravel/mainPage.html}"><- back to main page </a> </h4>
 
-        <h4>Check out<label th:text="${firstName}"/> <a href="#" th:href="@{/hostAndTravel/?.html}">'s HostAndTravel history! (not finished) </a> </h4>
+        <h4>Check out<label th:text="${firstName}"/> <a href="#" th:href="@{/hostAndTravel/hostAndTravelHistory.html(id=${personId})}">'s HostAndTravel history! </a> </h4>
         <table>
             <thead>
             <tr>

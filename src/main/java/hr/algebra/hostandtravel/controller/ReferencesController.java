@@ -17,4 +17,6 @@ public class ReferencesController { //TODO , rename this
     public String openReferencesPage(Principal principal, Model model, Person person) {
         return null;
     }
+
+
 }

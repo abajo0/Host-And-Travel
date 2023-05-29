@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h4> <a href="#" th:href="@{/hostAndTravel/mainPage.html}"><- back to main page </a> </h4>
+
+<h4>Check out<label th:text="${hostName}"/> <a href="#" th:href="@{/hostAndTravel/?.html}">'s HostAndTravel history! (not finished) </a> </h4>
+<ul>
+    <li th:each="err : ${#fields.errors('requestDto.*')}" th:text="${err}" />
+</ul>
+
+<form action="#" th:action="@{/hostAndTravel/sendRequest.html}" th:object="${requestDto}"
+      method="post">
+    <fieldset>
+        <input type="submit" id="submitButton" th:value="Save">
+        <table>
+            <thead>
+            <tr>
+                <th> Start Date </th>
+                <th> End Date </th>
+                <th> Messege </th>
+            </tr>
+            </thead>
+            <tbody>
+
+
+
+            <td><input type="date" th:field="*{startDate}" required="required" /></td>
+            <td><input type="date" th:field="*{endDate}" required="required" /></td>
+            <td><input th:field="*{message}"  required="required" /></td> <!-- TODO make text area-->
+            <td><input readonly th:field="*{travelerId}" hidden required="required" /></td>
+            <td><input  readonly th:field="*{hostId}" hidden required="required"> </td>
+            <td><input  readonly th:field="*{status}" hidden required="required"> </td>
+
+            </tbody>
+        </table>
+    </fieldset>
+</form>
+
+
+
+
+</body>
+</html>

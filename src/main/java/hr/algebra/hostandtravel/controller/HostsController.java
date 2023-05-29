@@ -23,10 +23,12 @@ public class HostsController {
 
     @GetMapping("hosts.html")
     public String openProfilePage(Principal principal, Model model,@RequestParam("city") String cityName) {
-        List<Person> hostList = personRepository.getHostsByCity(cityName);
-        model.addAttribute("hostList",hostList);
-        System.out.println(hostList);
+        Person loggedInPerson = personRepository.getPersonByEmail(principal.getName());
 
+        List<Person> hostList = personRepository.getHostsByCity(cityName);
+        hostList.removeIf(p -> p.getIdPerson() ==loggedInPerson.getIdPerson());
+
+        model.addAttribute("hostList",hostList);
 
         return "hosts.html";
     }

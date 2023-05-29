@@ -1,0 +1,80 @@
+--added message to Request
+--RequestStatus ID typo fixed
+CREATE DATABASE HostAndTravelDB2
+GO
+Use HostAndTravelDB2
+GO
+create table Country(
+IDCountry int IDENTITY PRIMARY KEY NOT NULL,
+CountryName nvarchar(15) NOT NULL
+)
+GO
+create table Gender(
+IDGender int IDENTITY PRIMARY KEY NOT NULL,
+GenderName nvarchar(15) -- Male, Female
+)
+GO
+create table City(
+IDCity int IDENTITY PRIMARY KEY NOT NULL,
+CityName nvarchar(50) NOT NULL,
+CountryID int FOREIGN KEY REFERENCES Country(IDCountry) NOT NULL
+)
+GO
+create table Person(
+IDPerson int IDENTITY PRIMARY KEY NOT NULL,
+FirstName nvarchar(50) NOT NULL,
+LastName nvarchar(50) NOT NULL,
+Email nvarchar(200) UNIQUE NOT NULL,
+HostStatus BIT NOT NULL,
+IsActive BIT DEFAULT (1) NOT NULL,
+AboutMe nvarchar(2000),
+BirthDate Date NOT NULL check (BirthDate < GETDATE()),
+GenderID int FOREIGN KEY REFERENCES Gender(IDGender) NOT NULL,
+CityID int FOREIGN KEY REFERENCES City(IDCity) NOT NULL,
+HashedPassword nvarchar(250) CHECK (LEN(HashedPassword) > 5) NOT NULL
+)
+GO
+create table Authority (
+IDAuthority int IDENTITY PRIMARY KEY NOT NULL,
+Email nvarchar(200) UNIQUE NOT NULL,
+Role nvarchar(50) not null,  --Admin,User
+)
+GO
+create table RequestStatus(
+IDRequestStatus int IDENTITY PRIMARY KEY NOT NULL,
+Status nvarchar(50) NOT NULL --Ongoing, Approved, Rejected
+)
+GO
+Create table Request(
+IDRequest int IDENTITY PRIMARY KEY NOT NULL,
+HostID int FOREIGN KEY REFERENCES Person(IDPerson) NOT NULL,
+TravelerID int FOREIGN KEY REFERENCES Person(IDPerson) NOT NULL,
+RequestStatusID int FOREIGN KEY REFERENCES RequestStatus(IDRequestStatus) NOT NULL,
+StartDate Date NOT NULL,
+EndDate Date,
+Message nvarchar(1500)
+)
+GO
+Create table Messege(
+IDMessege int IDENTITY PRIMARY KEY NOT NULL,
+SenderID int FOREIGN KEY REFERENCES Person(IDPerson) NOT NULL,
+ReciverID int FOREIGN KEY REFERENCES Person(IDPerson) NOT NULL,
+MessegeDateTime DateTime DEFAULT (GETDATE()) NOT NULL
+)
+GO
+create table Review(
+IDReview int IDENTITY PRIMARY KEY not null,
+Rating int check (Rating >= 1  AND Rating <=5) NOT NULL,
+Description nvarchar(2000) NOT NULL,
+ReviewDate date DEFAULT (GETDATE()) NOT NULL
+)
+GO
+create table HostAndTravelHistory(
+IDSurfHistory int IDENTITY PRIMARY KEY not null,
+HostID int FOREIGN KEY REFERENCES Person(IDPerson) NOT NULL,
+TravelerID int FOREIGN KEY REFERENCES Person(IDPerson) NOT NULL,
+HostReviewID int FOREIGN KEY REFERENCES Review(IDReview) NOT NULL,
+TravelerReviewID int FOREIGN KEY REFERENCES Review(IDReview) NOT NULL,
+StartDate Date NOT NULL,
+EndDate Date
+)

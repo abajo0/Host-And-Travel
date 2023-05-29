@@ -1,21 +1,83 @@
-USE HostAndTravelDB
+USE HostAndTravelDB2
 GO
 INSERT INTO Gender (GenderName)
 VALUES ('Male'),('Female')
 GO
 INSERT INTO Country(CountryName)
-VALUES ('Croatia')
+VALUES ('Croatia'),('Serbia')
 GO
 INSERT INTO City(CityName,CountryID)
-VALUES ('Zagreb',1)
+VALUES ('Zagreb',1),('Novi SAD',2)
 GO
-INSERT INTO Person (FirstName,LastName,Email,HostStatus,isActive,AboutMe,BirthDate,GenderID,CityID,HashedPassword)
-VALUES('AdminName','AdminLastName','admin@hostandtravel.com',1,1,'This is admin account','1999-01-01',1,1, '$2a$10$KFAt7kpig/JKKDVucQJh3Or0YkiwiVRyNGZz/e.vi2RnPzQDBf7BK');
-GO
-INSERT INTO Person (FirstName,LastName,Email,HostStatus,isActive,AboutMe,BirthDate,GenderID,CityID,HashedPassword)
-VALUES('UserFirstName','UserLastName','user@hostandtravel.com',1,1,'This is user account','2000-01-01',1,1, '$2a$10$MzkaBFiZ3nfau6w.TToTx.pjyYfDE.AS/lO9QiS8nC8bbMxmYQnLm');
-GO
-INSERT INTO Authority (Email,Role) VALUES('admin@hostandtravel.com', 'ROLE_ADMIN');
-GO
-INSERT INTO Authority (Email,Role) VALUES('user@hostandtravel.com', 'ROLE_USER');
 
+insert into RequestStatus (Status) values ('Pending')
+GO
+insert into RequestStatus (Status) values ('Accepted')
+GO
+insert into RequestStatus (Status) values ('Declined')
+GO
+
+
+INSERT INTO Person (FirstName,LastName,Email,HostStatus,isActive,AboutMe,BirthDate,GenderID,CityID,HashedPassword)
+VALUES('AdminName','AdminLastName','admin@mail.com',1,1,'This is admin account','1999-01-01',1,1, '$2a$10$c.NeeTxVkC0585ThQKO6uutFR3BTH2xCIu62cE6V1.OeNOoprIjBa');
+GO
+INSERT INTO Person (FirstName,LastName,Email,HostStatus,isActive,AboutMe,BirthDate,GenderID,CityID,HashedPassword)
+VALUES ('Marko','Maric','marko@mail.com',0,1,'Currently I am not hosting','2000-02-02',1,1,'$2a$10$c.NeeTxVkC0585ThQKO6uutFR3BTH2xCIu62cE6V1.OeNOoprIjBa')
+GO
+INSERT INTO Person (FirstName,LastName,Email,HostStatus,isActive,AboutMe,BirthDate,GenderID,CityID,HashedPassword)
+VALUES ('Milica','Todorovic','milica@mail.com',1,1,'Hi I am milica, I am hosting.','2001-02-02',2,2,'$2a$10$c.NeeTxVkC0585ThQKO6uutFR3BTH2xCIu62cE6V1.OeNOoprIjBa')
+GO
+INSERT INTO Person (FirstName,LastName,Email,HostStatus,isActive,AboutMe,BirthDate,GenderID,CityID,HashedPassword)
+VALUES ('Đuro','Veliki','djuro@mail.com',1,1,'Bok ja sam đuro, primam goste','1999-02-02',1,1,'$2a$10$c.NeeTxVkC0585ThQKO6uutFR3BTH2xCIu62cE6V1.OeNOoprIjBa')
+GO
+INSERT INTO Person (FirstName,LastName,Email,HostStatus,isActive,AboutMe,BirthDate,GenderID,CityID,HashedPassword)
+VALUES ('Pero','Peric','pero@mail.com',1,1,'Primam goste!','1999-02-02',1,1,'$2a$10$c.NeeTxVkC0585ThQKO6uutFR3BTH2xCIu62cE6V1.OeNOoprIjBa')
+GO
+
+INSERT INTO Authority (Email,Role) VALUES('admin@mail.com', 'ROLE_ADMIN');
+GO
+INSERT INTO Authority (Email,Role) VALUES('marko@mail.com', 'ROLE_USER');
+GO
+INSERT INTO Authority (Email,Role) VALUES('milica@mail.com', 'ROLE_USER');
+GO
+INSERT INTO Authority (Email,Role) VALUES('djuro@mail.com', 'ROLE_USER');
+GO
+INSERT INTO Authority (Email,Role) VALUES('pero@mail.com', 'ROLE_USER');
+GO
+
+insert into Request (HostID,TravelerID,RequestStatusID,StartDate,EndDate,Message)
+values(3,5,2,'2023-05-01','2023-05-05','Hi millica, I am pero. can you host me?')
+GO
+insert into Request (HostID,TravelerID,RequestStatusID,StartDate,EndDate,Message)
+values(4,2,2,'2023-05-01','2023-05-05','Hi Djuro, I am Marko. can you host me?')
+GO
+insert into Request (HostID,TravelerID,RequestStatusID,StartDate,EndDate,Message)
+values(5,3,2,'2023-05-01','2023-05-05','Hi Pero, I am Milica. can you host me?')
+GO
+INSERT INTO Review (Rating,Description,ReviewDate)
+VALUES (5,'Milica was great host!, would recommend','2023-05-05')
+GO
+INSERT INTO Review (Rating,Description,ReviewDate)
+VALUES (5,'Pero stayed at my place, it was great!','2023-05-05')
+GO
+INSERT INTO Review (Rating,Description,ReviewDate)
+VALUES (2,'Didnt like đuro as host, Dont really recommend','2023-05-05')
+GO
+INSERT INTO Review (Rating,Description,ReviewDate)
+VALUES (3,'I have hosted marko, marko is okay as traveler','2023-05-05')
+GO
+INSERT INTO Review (Rating,Description,ReviewDate)
+VALUES (5,'I hosted Pero before, now he hosted me. Pero is good host','2023-05-05')
+GO
+INSERT INTO Review (Rating,Description,ReviewDate)
+VALUES(5,'this time I hosted Milica, she is great','2023-05-05')
+
+GO
+INSERT INTO HostAndTravelHistory (HostID,TravelerID,HostReviewID,TravelerReviewID,StartDate,EndDate)
+VALUES (3,5,1,2,'2023-05-01','2023-05-05')
+GO
+INSERT INTO HostAndTravelHistory (HostID,TravelerID,HostReviewID,TravelerReviewID,StartDate,EndDate)
+VALUES (4,2,3,4,'2023-05-01','2023-05-05')
+GO
+INSERT INTO HostAndTravelHistory (HostID,TravelerID,HostReviewID,TravelerReviewID,StartDate,EndDate)
+VALUES (5,3,5,6,'2023-05-01','2023-05-05')

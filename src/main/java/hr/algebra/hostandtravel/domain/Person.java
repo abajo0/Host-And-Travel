@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 
 import java.time.Period;
 import java.time.temporal.TemporalAccessor;
+import java.util.Objects;
 
 
 @Data
@@ -51,4 +52,16 @@ public class Person {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Person)) return false;
+        Person person = (Person) o;
+        return email.equals(person.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(email);
+    }
 }

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h4> <a href="#" th:href="@{/hostAndTravel/mainPage.html}"><- back to main page </a> </h4>
+
+<h1><label th:text="${personFullName}"></label>'s travel history</h1>
+
+<tr th:each="htHistory: ${hostAndTravelHistoryList}">
+    <span th:if="${htHistory.host.idPerson == personId}">
+        <h2>has hosted:</h2>
+        <td><a href="#" th:href="@{/hostAndTravel/profile.html(id=${htHistory.traveler.idPerson})}"> <label th:text="${htHistory.traveler.firstName}"></label>  </a> </td>
+        <br>
+        <label>StartDate</label>
+        <td th:text="${htHistory.startDate}" />
+        <br/>
+        <label>End Date</label>
+        <td th:text="${htHistory.endDate}" />
+        <br>
+        <label>review: </label>
+        <br>
+         <label th:text="${htHistory.hostReview.description}"></label>
+        <br>
+        <br>
+        <br>
+    </span>
+
+    <span th:unless="${htHistory.host.idPerson == personId}">
+          <h2>was being hosted by:</h2>
+        <td><a href="#" th:href="@{/hostAndTravel/profile.html(id=${htHistory.host.idPerson})}"> <label th:text="${htHistory.host.firstName}"></label>  </a> </td>
+        <br>
+        <label>StartDate</label>
+        <td th:text="${htHistory.startDate}" />
+        <br/>
+        <label>End Date</label>
+        <td th:text="${htHistory.endDate}" />
+        <br>
+        <label>review: </label>
+        <br>
+         <label th:text="${htHistory.travelerReview.description}"></label>
+        <br>
+        <br>
+        <br>
+    </span>
+
+  <br>
+  <br>
+  <br>
+</tr>
+
+</body>
+</html>
