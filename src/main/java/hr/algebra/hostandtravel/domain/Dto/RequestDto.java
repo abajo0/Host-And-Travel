@@ -1,4 +1,4 @@
-package hr.algebra.hostandtravel.domain;
+package hr.algebra.hostandtravel.domain.Dto;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

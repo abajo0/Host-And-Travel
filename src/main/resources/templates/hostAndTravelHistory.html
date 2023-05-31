@@ -20,9 +20,11 @@
         <label>End Date</label>
         <td th:text="${htHistory.endDate}" />
         <br>
+        <span th:if="${htHistory.hostReview != null}">
         <label>review: </label>
         <br>
          <label th:text="${htHistory.hostReview.description}"></label>
+            </span>
         <br>
         <br>
         <br>
@@ -38,9 +40,11 @@
         <label>End Date</label>
         <td th:text="${htHistory.endDate}" />
         <br>
+         <span th:if="${htHistory.travelerReview != null}">
         <label>review: </label>
         <br>
          <label th:text="${htHistory.travelerReview.description}"></label>
+         </span>
         <br>
         <br>
         <br>

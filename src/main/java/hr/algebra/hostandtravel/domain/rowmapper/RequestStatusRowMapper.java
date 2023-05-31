@@ -8,8 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class RequestStatusRowMapper implements RowMapper<RequestStatus> {
-
-
     @Override
     public RequestStatus mapRow(ResultSet rs, int rowNum) throws SQLException {
         return new RequestStatus(

@@ -72,9 +72,9 @@ GO
 create table HostAndTravelHistory(
 IDSurfHistory int IDENTITY PRIMARY KEY not null,
 HostID int FOREIGN KEY REFERENCES Person(IDPerson) NOT NULL,
-TravelerID int FOREIGN KEY REFERENCES Person(IDPerson) NOT NULL,
-HostReviewID int FOREIGN KEY REFERENCES Review(IDReview) NOT NULL,
-TravelerReviewID int FOREIGN KEY REFERENCES Review(IDReview) NOT NULL,
+TravelerID int FOREIGN KEY REFERENCES Person(IDPerson)NOT NULL ,
+HostReviewID int FOREIGN KEY REFERENCES Review(IDReview) ,
+TravelerReviewID int FOREIGN KEY REFERENCES Review(IDReview) ,
 StartDate Date NOT NULL,
 EndDate Date
 )

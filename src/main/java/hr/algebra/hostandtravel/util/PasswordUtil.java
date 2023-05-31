@@ -17,6 +17,4 @@ public class PasswordUtil {
     public static String hashPassword(String password){
         return passwordEncoder.encode(password);
     }
-
-
 }

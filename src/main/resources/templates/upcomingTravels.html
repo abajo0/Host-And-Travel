@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h4> <a href="#" th:href="@{/hostAndTravel/mainPage.html}"><- back to main page </a> </h4>
+<span th:if="${hasUpcomingTravels}">
+     <tr th:each="request: ${upcomingTravels}">
+    <br>
+    <label>start date:</label>
+    <td th:text="${request.startDate}" />
+    <br>
+    <label>end date :</label>
+    <td th:text="${request.endDate}" />
+    <br>
+    <label>host:</label>
+    <a href="#" th:href="@{/hostAndTravel/profile.html(id=${request.host.idPerson})}"> <td th:text="${request.host.firstName}" /> </a>
+    <br>
+    <label>traveler:</label>
+    <a href="#" th:href="@{/hostAndTravel/profile.html(id=${request.host.idPerson})}"> <td th:text="${request.traveler.firstName}" /> </a>
+    <br>
+    <br>
+    <br>
+</tr>
+</span >
+<span th:unless="${hasUpcomingTravels}">
+    <h2>No Upcoming trips or hosts.</h2>
+</span>
+
+</body>
+</html>

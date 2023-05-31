@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+
+<h4> <a href="#" th:href="@{/hostAndTravel/mainPage.html}"><- back to main page </a> </h4>
+
+<h2>Write something about </h2>
+
+
+
+<form action="#" th:action="@{/hostAndTravel/newReview.html}" th:object="${review}"
+      method="post">
+    <fieldset>
+
+        <table>
+            <thead>
+            <tr>
+                <th> Rating (1-5)</th>
+                <th> Messege </th>
+            </tr>
+            </thead>
+            <tbody>
+            <td><input type="number" min="1" max="5"th:field="*{rating}" required="required" /></td>
+            <td><input type="text" th:field="*{description}" required="required" /></td>
+            <td><input type="text" th:field="*{hostAndTravelHistoryId}" required="required" hidden /></td>
+
+
+            </tbody>
+        </table>
+        <input type="submit" id="submitButton" th:value="Save">
+    </fieldset>
+</form>
+
+</body>
+</html>

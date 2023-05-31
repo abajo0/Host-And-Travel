@@ -78,7 +78,7 @@ public class PersonRepository implements Repository<Person>{
         try{
             jdbcTemplate.update(
                     "UPDATE Person set FirstName = ?,LastName = ?, HostStatus = ?, IsActive = ?,AboutMe = ?, BirthDate = ?,CityID = ?  where IDPerson = ?",
-                    new Object[]{person.getFirstName(),person.getLastName(),person.getIsHosting(),person.getIsActive(),person.getAboutMe(),person.getBirthdate(),cityId,person.getIdPerson()});
+                    person.getFirstName(),person.getLastName(),person.getIsHosting(),person.getIsActive(),person.getAboutMe(),person.getBirthdate(),cityId,person.getIdPerson());
         }catch (Exception e){
             System.out.println(e);
             return false;}
@@ -103,13 +103,7 @@ public class PersonRepository implements Repository<Person>{
 
         int key = inserter.executeAndReturnKey(params).intValue();
         person.setIdPerson(key);
-        /*if(inserter.executeAndReturnKey(params) instanceof Integer key) { //TODO always false
-            person.setIdPerson(key);
-            return person;
-        }
-        else {
-            throw new RuntimeException("Invalid key returned after insert!");
-        }*/
+
         return person;
     }
 

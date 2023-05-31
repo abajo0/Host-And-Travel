@@ -42,7 +42,7 @@ public class RequestRepository implements hr.algebra.hostandtravel.repository.Re
 
     @Override
     public List<Request> getAllEntities() {
-        return null;
+        return jdbcTemplate.query("SELECT * FROM Request", new RequestRowMapper(personRepository,requestStatusRepository));
     }
 
     @Override

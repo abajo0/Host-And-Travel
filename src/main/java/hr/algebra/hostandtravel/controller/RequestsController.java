@@ -3,7 +3,7 @@ package hr.algebra.hostandtravel.controller;
 import hr.algebra.hostandtravel.domain.HnTConstants;
 import hr.algebra.hostandtravel.domain.Person;
 import hr.algebra.hostandtravel.domain.Request;
-import hr.algebra.hostandtravel.domain.RequestDto;
+import hr.algebra.hostandtravel.domain.Dto.RequestDto;
 import hr.algebra.hostandtravel.repository.PersonRepository;
 import hr.algebra.hostandtravel.repository.RequestRepository;
 import jakarta.validation.Valid;
@@ -69,14 +69,17 @@ public class RequestsController {
         return "mainPage.html";
     }
 
-    @GetMapping("requests.html")//TODO
+    @GetMapping("requests.html")
     public String openRequestsPage(Principal principal, Model model) {
         Person person = personRepository.getPersonByEmail(principal.getName());
         List<Request> sentRequests = requestRepository.getRequestsByTravelerId(person.getIdPerson());
-        List<Request> incomingRequests = requestRepository.getRequestsByHostId(person.getIdPerson());
+        List<Request> receivedRequests = requestRepository.getRequestsByHostId(person.getIdPerson());
 
-        model.addAttribute("sentRequests", sentRequests);
-        model.addAttribute("incomingRequests", incomingRequests);
+        List<Request> pendingSentRequests = sentRequests.stream().filter(r -> r.getStatus().equals(HnTConstants.REQUEST_STATUS_PENDING)).toList();
+        List<Request> pendingReceivedRequests = receivedRequests.stream().filter(r -> r.getStatus().equals(HnTConstants.REQUEST_STATUS_PENDING)).toList();
+
+        model.addAttribute("sentRequests", pendingSentRequests);
+        model.addAttribute("receivedRequests", pendingReceivedRequests);
 
         return "requests.html";
     }
