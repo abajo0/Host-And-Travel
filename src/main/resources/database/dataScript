@@ -17,7 +17,6 @@ GO
 insert into RequestStatus (Status) values ('Declined')
 GO
 
-
 INSERT INTO Person (FirstName,LastName,Email,HostStatus,isActive,AboutMe,BirthDate,GenderID,CityID,HashedPassword)
 VALUES('AdminName','AdminLastName','admin@mail.com',1,1,'This is admin account','1999-01-01',1,1, '$2a$10$c.NeeTxVkC0585ThQKO6uutFR3BTH2xCIu62cE6V1.OeNOoprIjBa');
 GO

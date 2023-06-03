@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:custom="http://www.w3.org/1999/xhtml">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -45,10 +46,9 @@
     <a href="#" th:href="@{/hostAndTravel/profile.html(id=${request.traveler.idPerson})}"> <td th:text="${request.traveler.firstName}" /> </a>
     <br>
     <span th:if="${request.status == 'Pending'}">
-        <input id="accept-request" type="button"  value="save"> Accept request </input>
-        <input id="decline-request" type="button"  value="save"> Decline request </input>
-       <h4> <a th:href="@{/hostAndTravel/acceptRequest.html(id=${request.idRequest})}" custom:linkMethod="post">Accept request (NOT WORKING)</a></h4>
-        <h4><a th:href="@{/hostAndTravel/declineRequest.html(id=${request.idRequest})}" custom:linkMethod="post">Decline request (NOT WORKING)</a></h4>
+        <input type="hidden" id="requestId" th:value="${requestId}" />
+        <button id="acceptRequestBtn">Accept Request (Not working on backend)</button>
+        <button id="declineRequestBtn">Decline Request (Not working on backend)</button>
     </span>
 
     <br>
@@ -57,35 +57,61 @@
 </tr>
 </body>
 </html>
-<script>
-    $(function() {
-        $('#accept-request').click(acceptRequest);
-        $('#decline-request').click(declinerequest);
+<script type="text/javascript">
+    <!-- Include jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script type="text/javascript">
+    //TODO NOT WORKING
+    $(document).ready(function() {
+        // Accept Request
+        $("#acceptRequestBtn").click(function() {
+            console.log("Accept Request button clicked!"); // Add this line
+            var requestId = $("#requestId").val();
+
+            var csrfToken = $("#csrfForm input[name='_csrf']").val();
+            $.ajax({
+                url: "/acceptRequest.html",
+                type: "POST",
+                data: {
+                    id: requestId
+                },
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+                },
+                success: function(response) {
+                    window.location.href = "/hostAndTravel/requests.html";
+                },
+                error: function(xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        });
+
+        //TODO NOT WORKING
+        // Decline Request
+        $("#declineRequestBtn").click(function() {
+            console.log("Decline Request button clicked!"); // Add this line
+            var requestId = $("#requestId").val();
+
+            $.ajax({
+                url: "/declineRequest.html",
+                type: "POST",
+                data: {
+                    id: requestId
+                },
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+                },
+                success: function(response) {
+                    window.location.href = "/hostAndTravel/requests.html";
+                },
+                error: function(xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        });
     });
+</script>
 
-
-    function acceptRequest(){
-        $.ajax({
-            method: "POST",
-            url: "/your/action/endpoint",
-            data: $('#idYourForm').serialize(),
-            success: function(status){
-                if(status) {
-                    //here you check the response from your controller and add your business logic
-                }
-            }
-        });
-    }
-    function declinerequest(){
-        $.ajax({
-            method: "POST",
-            url: "/your/action/endpoint",
-            data: $('#idYourForm').serialize(),
-            success: function(status){
-                if(status) {
-                    //here you check the response from your controller and add your business logic
-                }
-            }
-        });
-    }
 </script>
