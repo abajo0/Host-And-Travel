@@ -1,0 +1,75 @@
+-- Insert sample data into Country table
+INSERT INTO Country (CountryName)
+VALUES ('United States'), ('Canada'), ('United Kingdom'), ('Australia'), ('Germany');
+
+-- Insert sample data into Gender table
+INSERT INTO Gender (GenderName)
+VALUES ('Male'), ('Female');
+
+-- Insert sample data into City table
+INSERT INTO City (CityName, CountryID)
+VALUES
+  ('New York City', 1),
+  ('Toronto', 2),
+  ('London', 3),
+  ('Sydney', 4),
+  ('Berlin', 5);
+
+-- Insert sample data into Person table
+INSERT INTO Person (FirstName, LastName, Email, HostStatus, AboutMe, BirthDate, GenderID, CityID, HashedPassword)
+VALUES
+  ('John', 'Doe', 'johndoe@example.com', 1, 'I love hosting travelers!', '1990-01-01', 1, 1, '$2a$10$c.NeeTxVkC0585ThQKO6uutFR3BTH2xCIu62cE6V1.OeNOoprIjBa'),
+  ('Jane', 'Smith', 'janesmith@example.com', 0, 'I enjoy traveling around the world.', '1995-05-10', 2, 2, '$2a$10$c.NeeTxVkC0585ThQKO6uutFR3BTH2xCIu62cE6V1.OeNOoprIjBa'),
+  ('Michael', 'Johnson', 'michaeljohnson@example.com', 1, 'Welcome to my profile!', '1987-09-15', 1, 1, '$2a$10$c.NeeTxVkC0585ThQKO6uutFR3BTH2xCIu62cE6V1.OeNOoprIjBa'),
+  ('Emily', 'Brown', 'emilybrown@example.com', 0, 'Traveling is my passion.', '1992-03-22', 2, 3, '$2a$10$c.NeeTxVkC0585ThQKO6uutFR3BTH2xCIu62cE6V1.OeNOoprIjBa'),
+  ('Alex', 'Miller', 'alexmiller@example.com', 1, 'Experienced traveler and host.', '1985-07-07', 1, 2, '$2a$10$c.NeeTxVkC0585ThQKO6uutFR3BTH2xCIu62cE6V1.OeNOoprIjBa');
+
+-- Insert sample data into Authority table
+INSERT INTO Authority (Email, Role)
+VALUES
+  ('admin@mail.com', 'ROLE_ADMIN'),
+  ('user@mail.com', 'ROLE_USER'),
+  ('moderator@mail.com', 'ROLE_USER'),
+  ('johndoe@mail.com', 'ROLE_USER'),
+  ('janesmith@mail.com', 'ROLE_USER'),
+  ('michaeljohnson@mail.com', 'ROLE_USER'),
+  ('emilybrown@mail.com', 'ROLE_USER'),
+  ('alexmiller@mail.com', 'ROLE_USER');
+
+-- Insert sample data into RequestStatus table
+INSERT INTO RequestStatus (Status)
+VALUES ('Pending'), ('Accepted'), ('Declined');
+
+-- Insert sample data into Request table
+INSERT INTO Request (HostID, TravelerID, RequestStatusID, StartDate, EndDate, Message)
+VALUES
+  (1, 2, 1, '2023-06-01', '2023-06-05', 'Hi, I''m interested in staying at your place.'),
+  (2, 1, 2, '2023-07-10', '2023-07-15', 'Hello, I''d like to book a room for my trip.'),
+  (3, 4, 3, '2023-06-15', '2023-06-20', 'I need accommodation for my business trip.'),
+  (5, 3, 1, '2023-08-01', '2023-08-10', 'Looking for a cozy place to stay during my vacation.');
+
+-- Insert sample data into Messege table
+INSERT INTO Messege (SenderID, ReciverID, MessegeDateTime)
+VALUES
+  (1, 2, '2023-06-02 09:30:00'),
+  (2, 1, '2023-06-02 10:00:00'),
+  (4, 3, '2023-06-03 14:20:00'),
+  (5, 1, '2023-06-04 16:45:00'),
+  (3, 2, '2023-07-11 12:00:00'),
+  (1, 4, '2023-07-13 11:30:00');
+
+-- Insert sample data into Review table
+INSERT INTO Review (Rating, Description, ReviewDate)
+VALUES
+  (4, 'Great host, highly recommended!', '2023-06-05'),
+  (5, 'Excellent experience, would book again.', '2023-07-16'),
+  (3, 'Average accommodation, could be better.', '2023-06-22'),
+  (5, 'Outstanding host, exceeded expectations!', '2023-08-12');
+
+-- Insert sample data into HostAndTravelHistory table
+INSERT INTO HostAndTravelHistory (HostID, TravelerID, HostReviewID, TravelerReviewID, StartDate, EndDate)
+VALUES
+  (1, 2, 1, 2, '2023-06-01', '2023-06-05'),
+  (2, 1, 2, 1, '2023-07-10', '2023-07-15'),
+  (3, 4, NULL, NULL, '2023-06-15', '2023-06-20'),
+  (5, 3, 4, NULL, '2023-08-01', '2023-08-10');

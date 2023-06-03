@@ -8,6 +8,7 @@ import hr.algebra.hostandtravel.repository.PersonRepository;
 import hr.algebra.hostandtravel.repository.RequestRepository;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -78,13 +79,12 @@ public class RequestsController {
         List<Request> pendingSentRequests = sentRequests.stream().filter(r -> r.getStatus().equals(HnTConstants.REQUEST_STATUS_PENDING)).toList();
         List<Request> pendingReceivedRequests = receivedRequests.stream().filter(r -> r.getStatus().equals(HnTConstants.REQUEST_STATUS_PENDING)).toList();
 
-        model.addAttribute("sentRequests", pendingSentRequests);
-        model.addAttribute("receivedRequests", pendingReceivedRequests);
+
 
         return "requests.html";
     }
 
-    @PostMapping("acceptRequest.html") //TODO
+    @PostMapping("acceptRequest.html")
     public String acceptRequest(Principal principal, @RequestParam("id") Integer requestId, Model model) {
         Request request = requestRepository.getEntity(requestId);
         Person loggedInPerson = personRepository.getPersonByEmail(principal.getName());

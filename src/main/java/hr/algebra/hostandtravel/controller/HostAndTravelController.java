@@ -34,10 +34,10 @@ public class HostAndTravelController {
         model.addAttribute("missingReview",!missingReview.isEmpty());
         model.addAttribute("missingReviewList",missingReview);
 
-        return "mainPage.html";
+        return "mainPage";
     }
 
-    private boolean missingReviewPerson(HostAndTravelHistory hostAndTravelHistory,Person person) {
+    private boolean missingReviewPerson(HostAndTravelHistory hostAndTravelHistory, Person person) {
         if(hostAndTravelHistory.getHost().getIdPerson() == person.getIdPerson()){
             return hostAndTravelHistory.getTravelerReview() == null;
         }else if (hostAndTravelHistory.getTraveler().getIdPerson() == person.getIdPerson()){

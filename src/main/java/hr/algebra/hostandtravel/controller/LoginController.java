@@ -38,11 +38,11 @@ public class LoginController {
         model.addAttribute("allCities",cityRepository.getAllCities());
         model.addAttribute("allGenders",genderRepository.getAllGenders());
 
-        return "register.html";
+        return "register";
     }
     @PostMapping("registerNewUser.html")
     public String registerNewUser(Model model, @Valid Person person, BindingResult bindingResult) {
-        if(personRepository.getPersonByEmail(person.getEmail())!= null){
+        if(personRepository.getPersonByEmail(person.getEmail()) != null){
             //user with that email already exists
             bindingResult.addError(new ObjectError("globalError", "User with that email already exists!"));
         }
@@ -62,7 +62,7 @@ public class LoginController {
         authorityRepository.insertAuthority(authority);
 
 
-        return "menu.html";
+        return "menu";
     }
 
 }
